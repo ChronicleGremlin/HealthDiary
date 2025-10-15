@@ -3,9 +3,11 @@ package com.ChronicleGremlin.health_diary_backend.service;
 import com.ChronicleGremlin.health_diary_backend.model.Calendar;
 import com.ChronicleGremlin.health_diary_backend.model.User;
 import com.ChronicleGremlin.health_diary_backend.repository.CalendarRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class CalendarService {
 
     private final CalendarRepository calendarRepository;
