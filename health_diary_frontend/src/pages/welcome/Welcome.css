@@ -1,0 +1,140 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Dancing+Script:wght@400..700&display=swap');
+
+/* Full-screen container with background image */
+.welcome-container {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('../../assets/images/diary.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+}
+
+/* Overlay to darken background for text clarity */
+.welcome-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 0;
+  /* Optional: slight parallax animation to add dynamism */
+  animation: parallax 20s linear infinite;
+}
+
+/* Parallax keyframes (optional) */
+@keyframes parallax {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Welcome content container (ensures content is above overlay) */
+.welcome-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  padding: 0 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Main title with fade-in and scale animation */
+.welcome-title {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  letter-spacing: 3px;
+  animation: fadeInScale 1.5s ease-out forwards;
+  opacity: 0;
+  font-family: 'Cinzel', serif;
+    font-weight: 700;
+}
+
+/* Subtitle with fade-in and slide-up animation */
+.welcome-content p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeInUp 1.8s ease-out forwards;
+  animation-delay: 0.5s;
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+}
+
+/* Call-to-Action Button with pulsing animation */
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(45deg, #367bbc, #2c6aa6);
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease;
+  margin-top: 1.5rem;
+  animation: pulse 2s infinite;
+}
+
+.cta-button:hover {
+  background: linear-gradient(45deg, #2c6aa6, #367bbc);
+  transform: translateY(-3px);
+}
+
+/* Keyframes for fadeInScale animation */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Keyframes for fadeInUp animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyframes for pulsing animation on button */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
