@@ -1,0 +1,9 @@
+{
+  "name": "Health Diary",
+  "short_name": "HealthDiary",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#007BFF",
+  "description": "A health diary app to manage your medical needs."
+}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import Calendar from "./Calendar";
-//import RecordForm from "./RecordForm";
+import RecordForm from "./RecordForm";
 import { recordApi } from "../../service/api";
 //UpcomingRecords
 import "../../assets/styles/components.css";
@@ -9,10 +9,10 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { user, logout, token } = useAuth();
-  const [events, setEvents] = useState([]);
+  const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showEventForm, setShowEventForm] = useState(false);
+  const [showRecordForm, setShowRecordForm] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const navigate = useNavigate();
 
@@ -22,62 +22,62 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (token) {
-      fetchEvents();
+      fetchRecords();
     }
   }, [token]);
 
-  const fetchEvents = async () => {
+  const fetchRecords = async () => {
     try {
       setLoading(true);
-      const response = await eventApi.getAllEvents();
+      const response = await recordApi.getAllRecords();
 
       const data = response.data;
-      console.log("Fetched events:", data);
+      console.log("Fetched records:", data);
 
       if (Array.isArray(data)) {
-        setEvents(data);
-      } else if (data?.events && Array.isArray(data.events)) {
-        setEvents(data.events);
+        setRecords(data);
+      } else if (data?.records && Array.isArray(data.records)) {
+        setRecords(data.records);
       } else {
         console.warn("Unexpected response format:", data);
-        setEvents([]); // fallback to empty array
+        setRecords([]); // fallback to empty array
       }
     } catch (err) {
-      console.error("Error fetching events:", err);
-      setError("Failed to load events. Please try again.");
+      console.error("Error fetching records:", err);
+      setError("Failed to load records. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleAddEvent = () => {
-    setShowEventForm(true);
+  const handleAddRecord = () => {
+    setShowRecordForm(true);
   };
 
-  const handleSaveEvent = async () => {
+  const handleSaveRecord = async () => {
     try {
       setError(null);
       setSuccessMessage(null);
-      await fetchEvents();
-      setSuccessMessage("Event created successfully!");
-      setShowEventForm(false);
+      await fetchRecords();
+      setSuccessMessage("Record created successfully!");
+      setShowRecordForm(false);
     } catch (err) {
-      console.error("Error saving event:", err);
-      setError("Failed to create event. Please try again.");
+      console.error("Error saving record:", err);
+      setError("Failed to create record. Please try again.");
     }
   };
 
-  const handleCancelEvent = () => {
-    setShowEventForm(false);
+  const handleCancelRecord = () => {
+    setShowRecordForm(false);
   };
 
-  const handleEventUpdated = async () => {
+  const handleRecordUpdated = async () => {
     try {
-      await fetchEvents();
-      setSuccessMessage("Event updated successfully!");
+      await fetchRecords();
+      setSuccessMessage("Record updated successfully!");
     } catch (err) {
-      console.error("Error updating events:", err);
-      setError("Failed to update events. Please try again.");
+      console.error("Error updating records:", err);
+      setError("Failed to update records. Please try again.");
     }
   };
 
@@ -93,9 +93,9 @@ const Dashboard = () => {
     return (
       <div className="error-container">
         <div className="error-message">
-          <h3>Error Loading Events</h3>
+          <h3>Error Loading Records</h3>
           <p>{error}</p>
-          <button onClick={fetchEvents} className="button button-primary">
+          <button onClick={fetchRecords} className="button button-primary">
             Try Again
           </button>
         </div>
@@ -116,7 +116,7 @@ const Dashboard = () => {
             }}
           >
             <div className="flex" style={{ alignItems: "center" }}>
-              <h1 className="card-title">Event Vista</h1>
+              <h1 className="card-title">Health Diary</h1>
             </div>
             <div className="flex" style={{ alignItems: "center", gap: "1rem" }}>
               <span className="card-content">
@@ -133,8 +133,8 @@ const Dashboard = () => {
               >
                 Profile
               </button>
-              <button onClick={handleAddEvent} className="button button-primary">
-                Add Event
+              <button onClick={handleAddRecord} className="button button-primary">
+                Add Record
               </button>
               <button onClick={logout} className="button button-secondary">
                 Logout
@@ -159,12 +159,12 @@ const Dashboard = () => {
 //        <UpcomingRecords records={records} />
       </div>
 
-      {showEventForm && (
+      {showRecordForm && (
         <div className="modal-overlay">
           <div className="modal-container">
-            <EventForm
-              onSubmit={handleSaveEvent}
-              onCancel={handleCancelEvent}
+            <RecordForm
+              onSubmit={handleSaveRecord}
+              onCancel={handleCancelRecord}
             />
           </div>
         </div>

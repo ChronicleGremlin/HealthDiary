@@ -80,6 +80,7 @@ const Login = () => {
               placeholder="Email address"
               value={credentials.emailAddress}
               onChange={handleChange}
+              autoComplete="current-emailAddress"
             />
           </div>
           <div className="form-group">
@@ -95,6 +96,7 @@ const Login = () => {
               placeholder="Password"
               value={credentials.password}
               onChange={handleChange}
+              autoComplete="current-password"
             />
           </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { recordApi } from "../../services/api";
-import "../../styles/components.css";
+import { recordApi } from "../../service/api";
+import "../../assets/styles/components.css";
 import styles from "./RecordForm.css";
 import Modal from "../../components/common/modal/Modal";
 
