@@ -7,7 +7,7 @@ import VerifyEmail from "./pages/user/account/VerifyEmail";
 import ResetPassword from "./pages/user/account/ResetPassword";
 import Dashboard from "./pages/dashboard/Dashboard";
 import "./App.css";
-import Welcome from "./pages/welcome/Welcome.css";
+import Welcome from "./pages/welcome/Welcome";
 import OAuth2RedirectHandler from "./pages/user/OAuth2RedirectHandler";
 import UserProfile from "./pages/user/UserProfile";
 import MainLayout from "./components/common/MainLayout";
@@ -49,7 +49,7 @@ function App() {
             }
           >
             <Route path="dashboard" element={<Dashboard />} />
-//            <Route path="profile" element={<UserProfile />} />
+            <Route path="profile" element={<UserProfile />} />
             {/* Default route when inside layout */}
             <Route index element={<Navigate to="dashboard" replace />} />
           </Route>

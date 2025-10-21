@@ -1,5 +1,13 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Dancing+Script:wght@400..700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Macondo+Swash+Caps&display=swap');
+
+.macondo-swash-caps-regular {
+  font-family: "Macondo Swash Caps", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
 
 /* Full-screen container with background image */
 .welcome-container {
@@ -70,7 +78,9 @@
   opacity: 0;
   animation: fadeInUp 1.8s ease-out forwards;
   animation-delay: 0.5s;
-  font-family: 'Dancing Script', cursive;
+  font-family: "Macondo Swash Caps", cursive;
+    font-weight: 400;
+    font-style: normal;
   font-size: 2.5rem;
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
-// import Sidebar from "../../components/common/Sidebar/Sidebar";
-// import Breadcrumbs from '../../components/common/Breadcrumbs/Breadcrumbs';
-// import Footer from "../../components/common/Footer/Footer";
+import Sidebar from "./sidebar/Sidebar";
+import Breadcrumbs from './breadcrumbs/Breadcrumbs';
+import Footer from "./footer/Footer";
 import { Outlet } from "react-router-dom";
 import "./MainLayout.css";
 
