@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import Calendar from "./Calendar";
-import RecordForm from "./RecordForm";
-import { recordApi } from "../../service/api";
-//UpcomingRecords
+import ReportForm from "./ReportForm";
+import { reportApi } from "../../service/api";
+//UpcomingReports
 import "../../assets/styles/components.css";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { user, logout, token } = useAuth();
-  const [records, setRecords] = useState([]);
+  const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showRecordForm, setShowRecordForm] = useState(false);
+  const [showReportForm, setShowReportForm] = useState(false);
   const [successMessage, setSuccessMessage] = useState(null);
   const navigate = useNavigate();
 
@@ -22,62 +22,62 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (token) {
-      fetchRecords();
+      fetchReports();
     }
   }, [token]);
 
-  const fetchRecords = async () => {
+  const fetchReports = async () => {
     try {
       setLoading(true);
-      const response = await recordApi.getAllRecords();
+      const response = await reportApi.getAllReports();
 
       const data = response.data;
-      console.log("Fetched records:", data);
+      console.log("Fetched reports:", data);
 
       if (Array.isArray(data)) {
-        setRecords(data);
-      } else if (data?.records && Array.isArray(data.records)) {
-        setRecords(data.records);
+        setReports(data);
+      } else if (data?.reports && Array.isArray(data.reports)) {
+        setReports(data.reports);
       } else {
         console.warn("Unexpected response format:", data);
-        setRecords([]); // fallback to empty array
+        setReports([]); // fallback to empty array
       }
     } catch (err) {
-      console.error("Error fetching records:", err);
-      setError("Failed to load records. Please try again.");
+      console.error("Error fetching reports:", err);
+      setError("Failed to load reports. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleAddRecord = () => {
-    setShowRecordForm(true);
+  const handleAddReport = () => {
+    setShowReportForm(true);
   };
 
-  const handleSaveRecord = async () => {
+  const handleSaveReport = async () => {
     try {
       setError(null);
       setSuccessMessage(null);
-      await fetchRecords();
-      setSuccessMessage("Record created successfully!");
-      setShowRecordForm(false);
+      await fetchReports();
+      setSuccessMessage("Report created successfully!");
+      setShowReportForm(false);
     } catch (err) {
-      console.error("Error saving record:", err);
-      setError("Failed to create record. Please try again.");
+      console.error("Error saving report:", err);
+      setError("Failed to create report. Please try again.");
     }
   };
 
-  const handleCancelRecord = () => {
-    setShowRecordForm(false);
+  const handleCancelReport = () => {
+    setShowReportForm(false);
   };
 
-  const handleRecordUpdated = async () => {
+  const handleReportUpdated = async () => {
     try {
-      await fetchRecords();
-      setSuccessMessage("Record updated successfully!");
+      await fetchReports();
+      setSuccessMessage("Report updated successfully!");
     } catch (err) {
-      console.error("Error updating records:", err);
-      setError("Failed to update records. Please try again.");
+      console.error("Error updating reports:", err);
+      setError("Failed to update reports. Please try again.");
     }
   };
 
@@ -93,9 +93,9 @@ const Dashboard = () => {
     return (
       <div className="error-container">
         <div className="error-message">
-          <h3>Error Loading Records</h3>
+          <h3>Error Loading Reports</h3>
           <p>{error}</p>
-          <button onClick={fetchRecords} className="button button-primary">
+          <button onClick={fetchReports} className="button button-primary">
             Try Again
           </button>
         </div>
@@ -133,8 +133,8 @@ const Dashboard = () => {
               >
                 Profile
               </button>
-              <button onClick={handleAddRecord} className="button button-primary">
-                Add Record
+              <button onClick={handleAddReport} className="button button-primary">
+                Add Report
               </button>
               <button onClick={logout} className="button button-secondary">
                 Logout
@@ -155,16 +155,16 @@ const Dashboard = () => {
             {error}
           </div>
         )}
-        <Calendar records={records} onRecordUpdated={handleRecordUpdated} />
-//        <UpcomingRecords records={records} />
+        <Calendar reports={reports} onReportUpdated={handleReportUpdated} />
+//        <UpcomingReports reports={reports} />
       </div>
 
-      {showRecordForm && (
+      {showReportForm && (
         <div className="modal-overlay">
           <div className="modal-container">
-            <RecordForm
-              onSubmit={handleSaveRecord}
-              onCancel={handleCancelRecord}
+            <ReportForm
+              onSubmit={handleSaveReport}
+              onCancel={handleCancelReport}
             />
           </div>
         </div>

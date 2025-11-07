@@ -51,16 +51,16 @@ axiosInstance.interceptors.response.use(
 );
 
 
-export const recordApi = {
-  getAllRecords: () => axiosInstance.get("/api/records/all"),
-  getRecordsById: (id) => axiosInstance.get(`/api/records/find/${id}`),
-  getRecordsByName: (name) => axiosInstance.get(`/api/records/find/name/${name}`),
-  createRecord: (recordData) => axiosInstance.post("/api/records/add", recordData),
-  updateRecord: (id, recordData) =>
-    axiosInstance.put(`/api/records/update/${id}`, recordData),
-  deleteRecord: (id) => axiosInstance.delete(`/api/records/delete/${id}`),
-  rebookRecord: (id, rebookData) =>
-    axiosInstance.post(`/api/records/rebook/${id}`, rebookData),
+export const reportApi = {
+  getAllReports: () => axiosInstance.get("/api/reports/all"),
+  getReportsById: (id) => axiosInstance.get(`/api/reports/find/${id}`),
+  getReportsByName: (name) => axiosInstance.get(`/api/reports/find/name/${name}`),
+  createReport: (reportData) => axiosInstance.post("/api/reports/add", reportData),
+  updateReport: (id, reportData) =>
+    axiosInstance.put(`/api/reports/update/${id}`, reportData),
+  deleteReport: (id) => axiosInstance.delete(`/api/reports/delete/${id}`),
+//  repeatReport: (id, repeatData) =>
+//    axiosInstance.post(`/api/reports/repeat/${id}`, repeatData),
 };
 
 export const calendarApi = {
